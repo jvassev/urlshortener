@@ -22,7 +22,7 @@ The *-with-dependencies.jar is all you need. Try to start it from the console (y
 
 
 Using curl to shorten the URL of this very file and GETting it over the short url:
-    THIS_README=$(curl -s -d https://raw.github.com/jvassev/urlshortener/master/README -X POST http://localhost:8080)
+    THIS_README=$(curl -s -d https://raw.github.com/jvassev/urlshortener/master/README.md -X POST http://localhost:8080)
     echo $THIS_README
     curl $THIS_README
 
