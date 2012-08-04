@@ -7,12 +7,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jvassev.urlshortener.impl.RedisBackedUrlShortener;
+
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 
 import redis.clients.jedis.Jedis;
-
-import jvassev.urlshortener.impl.RedisBackedUrlShortener;
 
 public class ShortenerServlet extends HttpServlet {
 
