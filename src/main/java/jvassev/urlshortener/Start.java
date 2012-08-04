@@ -7,15 +7,12 @@ import org.eclipse.jetty.servlet.ServletHolder;
 public class Start {
 	public static void main(String[] args) throws Exception {
 		System.out.println("Customizations available");
-		System.out.println("\t-Dport(8080) port to run webserver");
-		System.out
-				.println("\t-Dredis(localhost:6379) location of redis server");
-		System.out
-				.println("\t-Dnamespace(urls) root path in redis where to store program data");
-		Server server = new Server(Integer.valueOf(System.getProperty("port",
-				"8080")));
-		ServletContextHandler context = new ServletContextHandler(
-				ServletContextHandler.SESSIONS);
+		System.out.println("\t-Dport (8080) port to run webserver");
+		System.out.println("\t-Dredis (localhost:6379) location of redis server");
+		System.out.println("\t-Dnamespace (urls) root path in redis where to store program data");
+		System.out.println("\t-Dserver (http://localhost:8080) root path in redis where to store program data");
+		Server server = new Server(Integer.valueOf(System.getProperty("port", "8080")));
+		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
 		context.addServlet(new ServletHolder(new ShortenerServlet()), "/*");
 

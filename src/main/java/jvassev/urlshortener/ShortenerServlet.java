@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 
 import redis.clients.jedis.Jedis;
 
@@ -16,8 +17,10 @@ import jvassev.urlshortener.impl.RedisBackedUrlShortener;
 public class ShortenerServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 2040765997590119042L;
-	
+
 	private UrlShortener shortener;
+
+	private String host;
 
 	@Override
 	public void init() throws ServletException {
@@ -33,6 +36,11 @@ public class ShortenerServlet extends HttpServlet {
 		String namespace = System.getProperty("namespace", "urls");
 		Jedis jedis = new Jedis(redisUrl, port);
 		shortener = new RedisBackedUrlShortener(jedis, namespace);
+		host = System.getProperty("host",
+				"http://localhost:" + System.getProperty("port", "8080/"));
+		if (!host.endsWith("/")) {
+			host = host + "/";
+		}
 	}
 
 	@Override
@@ -64,6 +72,6 @@ public class ShortenerServlet extends HttpServlet {
 		}
 
 		String shortened = shortener.shorten(full);
-		resp.getWriter().print(shortened);
+		resp.getWriter().print(host + shortened);
 	}
 }
